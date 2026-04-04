@@ -24,7 +24,7 @@ public class RecordController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteRecord(@PathVariable Long recordId) {
+    public ResponseEntity<?> deleteRecord(@PathVariable("id") Long recordId) {
         service.deleteRecord(recordId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
