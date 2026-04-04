@@ -24,6 +24,9 @@ public class AuthenticationService {
         if(repo.existsByEmail(registerRequest.getEmail())){
             throw new BadRequestException("Email already exists please check once.");
         }
+        if(repo.existsByPhone(registerRequest.getPhone())){
+            throw new BadRequestException("Phone already exists please check once");
+        }
         User user = UserMapper.toEntity(registerRequest);
         user.setPassword(encoder.encode(registerRequest.getPassword()));
         user.setRole("VIEWER");
