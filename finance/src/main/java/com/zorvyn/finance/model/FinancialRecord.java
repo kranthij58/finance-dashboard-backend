@@ -22,27 +22,23 @@ public class FinancialRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false)
     private BigDecimal amount;
 
-    @NotBlank
     @Column(nullable = false)
     private String type;
 
-    @NotBlank
     @Column(nullable = false)
     private String category;
 
-    @NotNull
+    @Column(nullable = false)
     private LocalDate date;
-
 
     private String description;
 
     @ManyToOne
-    @JoinColumn(nullable = false,name = "created_by")
+    @JoinColumn(nullable = false, name = "created_by")
     private User createdBy;
-
 
     private LocalDateTime deletedAt;
 }

@@ -3,6 +3,7 @@ package com.zorvyn.finance.controller;
 import com.zorvyn.finance.dto.request.CreateRecordRequest;
 import com.zorvyn.finance.dto.request.UpdateRecordRequest;
 import com.zorvyn.finance.service.RecordService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class RecordController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createRecord(@RequestBody CreateRecordRequest recordRequest) {
+    public ResponseEntity<?> createRecord(@Valid @RequestBody CreateRecordRequest recordRequest) {
         service.createRecord(recordRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -30,7 +31,7 @@ public class RecordController {
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<?> updateRecord(@RequestBody UpdateRecordRequest updateRequest, @PathVariable("id") Long recordId) {
+    public ResponseEntity<?> updateRecord(@Valid @RequestBody UpdateRecordRequest updateRequest, @PathVariable("id") Long recordId) {
         service.updateRecord(updateRequest,recordId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

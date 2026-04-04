@@ -4,6 +4,7 @@ import com.zorvyn.finance.dto.request.CreateUserRequest;
 import com.zorvyn.finance.dto.request.UpdateUserRequest;
 import com.zorvyn.finance.model.User;
 import com.zorvyn.finance.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addUser(@RequestBody CreateUserRequest request){
+    public ResponseEntity<?> addUser(@Valid @RequestBody CreateUserRequest request){
         service.addUser(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<?> updateUser(@RequestBody UpdateUserRequest updateRequest,@PathVariable("id") Long userId) {
+    public ResponseEntity<?> updateUser(@Valid @RequestBody UpdateUserRequest updateRequest,@PathVariable("id") Long userId) {
         service.updateUser(updateRequest, userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
