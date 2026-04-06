@@ -4,6 +4,7 @@ import com.zorvyn.finance.dto.mapper.FinancialRecordMapper;
 import com.zorvyn.finance.dto.request.CreateRecordRequest;
 import com.zorvyn.finance.dto.request.UpdateRecordRequest;
 import com.zorvyn.finance.dto.response.FinancialRecordResponse;
+import com.zorvyn.finance.exception.BadRequestException;
 import com.zorvyn.finance.exception.ResourceNotFoundException;
 import com.zorvyn.finance.model.FinancialRecord;
 import com.zorvyn.finance.model.User;
@@ -59,6 +60,9 @@ public class RecordService {
         FinancialRecord record = recordRepo.findById(recordId)
                 .orElseThrow(() -> new ResourceNotFoundException("Record not found with id: " + recordId));
         record.setDeletedAt(LocalDateTime.now());
+        if (record.getDeletedAt() != null) {
+            throw new BadRequestException("Record already deleted.");
+        }
         recordRepo.save(record);
     }
 

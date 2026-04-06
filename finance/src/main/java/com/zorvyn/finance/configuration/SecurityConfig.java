@@ -38,6 +38,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/record/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/record/**").hasAnyRole("ADMIN", "ANALYST", "VIEWER")
                         .requestMatchers("/api/dashboard/**").hasAnyRole("ADMIN", "ANALYST", "VIEWER")
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(httpBasic -> httpBasic.realmName("Finance API"))
