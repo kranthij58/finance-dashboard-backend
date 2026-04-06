@@ -94,4 +94,4 @@ Swagger UI: `http://localhost:8080/swagger-ui/index.html`
 
 ## GitHub
 
-https://github.com/kranthij58/finance
+https://github.com/kranthij58/finance-dashboard-backend
