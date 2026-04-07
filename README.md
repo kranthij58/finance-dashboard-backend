@@ -47,7 +47,13 @@ where users interact with financial data based on their role.
 
 1. Clone the repo
 2. Create a MySQL database named `finance_db`
-3. Update `application.properties` with your DB credentials
+3. Create src/main/resources/application.properties and add:
+
+   spring.datasource.url=jdbc:mysql://localhost:3306/finance_db
+   spring.datasource.username=your_username
+   spring.datasource.password=your_password
+   spring.jpa.hibernate.ddl-auto=update
+   spring.jpa.show-sql=true
 4. Run the app — Hibernate creates tables automatically
 5. Default admin is created on startup:
     - Email: `admin@zorvyn.com`
