@@ -75,12 +75,19 @@ This project does not include `application.properties` for security reasons.
 Create `src/main/resources/application.properties` and add:
 
 ```properties
+#Database properties
 spring.datasource.url=jdbc:mysql://localhost:3306/finance_db
 spring.datasource.username=your_username
 spring.datasource.password=your_password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
+#JPA properties
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+springdoc.swagger-ui.persist-authorization=true
 
 ```
 
