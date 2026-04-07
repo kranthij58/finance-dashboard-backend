@@ -37,7 +37,7 @@ where users interact with financial data based on their role.
 
 ## Tech Stack
 
-- Java 17, Spring Boot 3
+- Java 21, Spring Boot 4
 - Spring Security — HTTP Basic Authentication
 - Spring Data JPA + Hibernate + MySQL
 - Lombok, Bean Validation
