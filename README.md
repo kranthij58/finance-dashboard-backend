@@ -14,17 +14,31 @@ where users interact with financial data based on their role.
 - Deleted records are not permanently removed — soft delete keeps the data intact
   since this is financial data and audit trails matter
 
+
+## Architecture
+
+The application follows a layered architecture:
+
+- Controller layer handles HTTP requests  
+- Service layer contains business logic  
+- Repository layer interacts with the database
+
+
 ## Why I Made Certain Decisions
 
-- **Admin controls everything** — financial data is sensitive, so I kept full control
+- **Admin controls everything** — financial data is sensitive, so I kept full control  
   with the admin rather than letting users manage themselves
-- **VIEWER by default on register** — anyone can register but gets minimal access.
+
+- **VIEWER by default on register** — anyone can register but gets minimal access  
   Admin decides who gets more
-- **Soft delete for records** — financial records should never be permanently deleted.
+
+- **Soft delete for records** — financial records should never be permanently deleted  
   deletedAt timestamp marks them as deleted but keeps them in DB
-- **HTTP Basic Auth** — kept it simple for this assignment. JWT can be plugged in
-  for production use
-- **Default admin on startup** — a DataSeeder creates the first admin automatically
+
+- **HTTP Basic Auth** — prioritized simplicity and faster implementation under time constraints  
+  design allows easy migration to JWT for production use
+
+- **Default admin on startup** — a DataSeeder creates the first admin automatically  
   so the system is usable from the start without any manual DB inserts
 
 ## Tradeoffs
@@ -47,21 +61,41 @@ where users interact with financial data based on their role.
 
 1. Clone the repo
 2. Create a MySQL database named `finance_db`
-3. Create src/main/resources/application.properties and add:
-
-   spring.datasource.url=jdbc:mysql://localhost:3306/finance_db
-   spring.datasource.username=your_username
-   spring.datasource.password=your_password
-   spring.jpa.hibernate.ddl-auto=update
-   spring.jpa.show-sql=true
+3. Create `application.properties` (see Configuration section below)
 4. Run the app — Hibernate creates tables automatically
 5. Default admin is created on startup:
     - Email: `admin@zorvyn.com`
     - Password: `Admin@123`
 
+
+## ⚠️ Configuration
+
+This project does not include `application.properties` for security reasons.
+
+Create `src/main/resources/application.properties` and add:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/finance_db
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+```
+
+
 ## API Documentation
 
 Swagger UI: `http://localhost:8080/swagger-ui/index.html`
+
+## Quick Testing
+
+Start the application and open Swagger UI:
+
+http://localhost:8080/swagger-ui/index.html
+
+Use default admin credentials to test secured endpoints.
 
 ## Endpoints
 
@@ -97,6 +131,22 @@ Swagger UI: `http://localhost:8080/swagger-ui/index.html`
 | GET    | /api/dashboard/summary | ALL    | Full summary with category totals |
 | GET    | /api/dashboard/weekly  | ALL    | Last 7 days trends                |
 | GET    | /api/dashboard/monthly | ALL    | Last 30 days trends               |
+
+
+## ⚠️ Note on Versions
+
+This project was initially submitted mentioning:
+
+- Java 17  
+- Spring Boot 3  
+
+However, the current implementation uses:
+
+- Java 21  
+- Spring Boot 4  
+
+Please ensure the correct versions are used while running the project.
+
 
 ## GitHub
 
