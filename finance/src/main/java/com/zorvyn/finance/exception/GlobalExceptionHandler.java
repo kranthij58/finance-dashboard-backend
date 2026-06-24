@@ -3,6 +3,7 @@ package com.zorvyn.finance.exception;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -50,6 +51,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<?> handleBadCredentials(BadCredentialsException ex){
+        ErrorResponse error = new ErrorResponse(400,ex.getMessage(),LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<?> handleUsernameNotFoundException(UsernameNotFoundException ex) {
